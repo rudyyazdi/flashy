@@ -70,9 +70,9 @@
   "scripts": {
     "start": "FORCE_COLOR=true nf start",
     "api:start": "DEBUG=express:* nodemon api/index.ts",
-    "app:start": "node app/scripts/start.js",
-    "app:build": "node app/scripts/build.js",
-    "app:test": "node app/scripts/test.js"
+    "app:start": "node scripts/start.js",
+    "app:build": "node scripts/build.js",
+    "app:test": "node scripts/test.js"
   },
   "proxy": "http://localhost:8080",
   "eslintConfig": {
