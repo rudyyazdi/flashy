@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import "./App.css";
+import React from "react";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
-class App extends Component {
-  public render() {
-    return (
-      <div className="App">
-         hi
-      </div>
-    );
-  }
-}
+import "./App.css";
+import Product from "./Product";
+
+const App = () => (<div className="App">
+  <BrowserRouter>
+    <Link to="/products">products</Link>
+    <Route exact path="/products" component={Product} />
+  </BrowserRouter>
+</div>)
 
 export default App;
