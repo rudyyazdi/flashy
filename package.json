@@ -5,8 +5,11 @@
   "dependencies": {
     "@babel/core": "7.2.2",
     "@svgr/webpack": "4.1.0",
+    "@types/chai": "^4.1.7",
     "@types/express": "^4.16.1",
     "@types/jest": "24.0.11",
+    "@types/mocha": "^5.2.6",
+    "@types/mongoose": "^5.3.26",
     "@types/node": "^11.13.4",
     "@types/react": "16.8.13",
     "@types/react-dom": "16.8.4",
@@ -19,6 +22,7 @@
     "babel-preset-react-app": "^7.0.2",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "chai": "^4.2.0",
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
@@ -40,6 +44,8 @@
     "jest-resolve": "23.6.0",
     "jest-watch-typeahead": "^0.2.1",
     "mini-css-extract-plugin": "0.5.0",
+    "mocha": "^6.1.4",
+    "mongoose": "^5.5.3",
     "nodemon": "^1.18.11",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
@@ -70,6 +76,7 @@
   "scripts": {
     "start": "FORCE_COLOR=true nf start",
     "api:start": "DEBUG=express:* nodemon api/index.ts",
+    "api:test": "nodemon --exec 'mocha -r ts-node/register api/**/__tests__/**/*.ts -R min'",
     "app:start": "node scripts/start.js",
     "app:build": "node scripts/build.js",
     "app:test": "node scripts/test.js"
