@@ -75,7 +75,7 @@
   },
   "scripts": {
     "start": "FORCE_COLOR=true nf start",
-    "api:start": "DEBUG=express:* nodemon api/index.ts",
+    "api:start": "NODE_ENV=development DEBUG=express:* nodemon api/index.ts",
     "api:test": "NODE_ENV=test nodemon --exec mocha",
     "app:start": "node scripts/start.js",
     "app:build": "node scripts/build.js",
