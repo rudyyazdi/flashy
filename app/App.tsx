@@ -22,7 +22,7 @@ const App = () => (<div className="App">
       <Link to="/" style={navLinkStyle}>home</Link>
       <Link to="/products" style={navLinkStyle}>products</Link>
     </div>
-    <Route exact={true} path="/products" component={Product} />
+    <Route path="/products" component={Product} />
   </BrowserRouter>
 </div>)
 
