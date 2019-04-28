@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link, Switch } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 interface Iproduct {
   price: number;
   name: string;
-  _id: string;
+  // _id: string;
 }
 
 const List: React.FC<{setIsLoading: React.Dispatch<boolean>}> = ({ setIsLoading }) => {
@@ -30,10 +31,39 @@ const List: React.FC<{setIsLoading: React.Dispatch<boolean>}> = ({ setIsLoading 
   );
 };
 
-const New: React.FC<{setIsLoading: React.Dispatch<boolean>}> = ({ setIsLoading }) => {
+const New: React.FC<{setIsLoading: React.Dispatch<boolean>; isLoading: boolean}> = ({ setIsLoading, isLoading }) => {
+  const validate = (values: Iproduct) => {
+    let errors = {};
+    return errors;
+  };
+
+  const onSubmit = (values: Iproduct) => {
+    setIsLoading(true);
+    console.log(values);
+  };
+
   return (
     <div>
-      <Link to="/products">back</Link>
+      <Formik
+        initialValues={{ name: '', price: 0 }}
+        validate={validate}
+        onSubmit={onSubmit}
+      >
+        <Form>
+          <Field type="name" name="name" />
+          <ErrorMessage name="name" component="div" />
+          <Field type="price" name="price" />
+          <ErrorMessage name="price" component="div" />
+          <button type="submit" disabled={isLoading}>
+            Submit
+          </button>
+          <Link to="/products">
+            <button>
+              <span>back</span>
+            </button>
+          </Link>
+        </Form>
+      </Formik>
     </div>
   );
 };
@@ -45,8 +75,8 @@ const Product = () => {
     <div>
       {isLoading && "Loading ..."}
       <Switch>
-        <Route path="/products/new" render={() => <New setIsLoading={setIsLoading} />} />
-        <Route render={() => <List setIsLoading={setIsLoading} />} />
+        <Route path="/products/new" render={() => <New setIsLoading={setIsLoading} isLoading={isLoading} />} />
+        <Route render={() => <List setIsLoading={setIsLoading}  />} />
       </Switch>
     </div>
   );
