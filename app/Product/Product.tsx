@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Route, Link, Switch } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
 
 interface Iproduct {
   price: number;
   name: string;
   // _id: string;
 }
+
+const productSchema = yup.object().shape({
+  name: yup.string().required(),
+  price: yup
+    .number()
+    .required()
+    .positive()
+    .integer(),
+});
+
 
 const List: React.FC<{setIsLoading: React.Dispatch<boolean>}> = ({ setIsLoading }) => {
   const [products, setProducts] = useState<Iproduct[]>([]);
@@ -32,9 +43,11 @@ const List: React.FC<{setIsLoading: React.Dispatch<boolean>}> = ({ setIsLoading 
 };
 
 const New: React.FC<{setIsLoading: React.Dispatch<boolean>; isLoading: boolean}> = ({ setIsLoading, isLoading }) => {
-  const validate = (values: Iproduct) => {
-    let errors = {};
-    return errors;
+  const formStyle: React.CSSProperties = {
+    marginTop: "10px",
+    display: "flex",
+    flexDirection: "column",
+    width: "300px"
   };
 
   const onSubmit = (values: Iproduct) => {
@@ -46,22 +59,24 @@ const New: React.FC<{setIsLoading: React.Dispatch<boolean>; isLoading: boolean}>
     <div>
       <Formik
         initialValues={{ name: '', price: 0 }}
-        validate={validate}
+        validationSchema={productSchema}
         onSubmit={onSubmit}
       >
-        <Form>
+        <Form style={formStyle}>
           <Field type="name" name="name" />
           <ErrorMessage name="name" component="div" />
           <Field type="price" name="price" />
           <ErrorMessage name="price" component="div" />
-          <button type="submit" disabled={isLoading}>
-            Submit
-          </button>
-          <Link to="/products">
-            <button>
-              <span>back</span>
+          <div>
+            <button type="submit" disabled={isLoading}>
+              Submit
             </button>
-          </Link>
+            <Link to="/products">
+              <button>
+                <span>back</span>
+              </button>
+            </Link>
+          </div>
         </Form>
       </Formik>
     </div>
